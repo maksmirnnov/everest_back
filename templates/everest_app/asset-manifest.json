@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f4c9a53e.css",
+    "main.js": "/static/js/main.ef7e2941.js",
+    "static/media/Rectangle 39.jpg": "/static/media/Rectangle 39.7cf9a2846cc84b9ce41c.jpg",
+    "static/media/seminar2.jpg": "/static/media/seminar2.f5717e35fde48d01569d.jpg",
+    "static/media/Rectangle 3.jpg": "/static/media/Rectangle 3.4f9a79517dff7f166e02.jpg",
+    "static/media/Rectangle 26.jpg": "/static/media/Rectangle 26.982cac707c56a93db997.jpg",
+    "static/media/mounts_news.jpg": "/static/media/mounts_news.05bb1942d460eea63a6c.jpg",
+    "static/media/mounts_mobile_news.jpg": "/static/media/mounts_mobile_news.302f95fd8952e38217ab.jpg",
+    "index.html": "/index.html",
+    "main.f4c9a53e.css.map": "/static/css/main.f4c9a53e.css.map",
+    "main.ef7e2941.js.map": "/static/js/main.ef7e2941.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4c9a53e.css",
+    "static/js/main.ef7e2941.js"
+  ]
+}
