@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tickets.models import Ticket, EducationTicket
+from tickets_app.models import Ticket, EducationTicket
 
 
 class TicketAdmin(admin.ModelAdmin):

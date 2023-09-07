@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'everest_app',
-    'tickets',
+    'tickets_app',
 ]
 
 MIDDLEWARE = [

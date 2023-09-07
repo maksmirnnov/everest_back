@@ -1,5 +1,4 @@
 from django.db import models
-
 from everest_app.models import Seminar
 
 
@@ -17,6 +16,7 @@ class EducationTicket(models.Model):
         verbose_name = 'Заявка на корпоративное обучение'
         verbose_name_plural = 'Заявки на корпоративное обучение'
         ordering = ['-id']
+
 
 class Ticket(models.Model):
     seminar = models.ForeignKey(Seminar, on_delete=models.CASCADE, verbose_name='Семинар')

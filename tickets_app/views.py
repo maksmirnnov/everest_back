@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from rest_framework import mixins
 from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet
-from tickets.models import Ticket, EducationTicket
-from tickets.serializers import TicketSerializer, EducationTicketSerializer
+from tickets_app.models import Ticket, EducationTicket
+from tickets_app.serializers import TicketSerializer, EducationTicketSerializer
 
 
 class TicketViewSet(mixins.CreateModelMixin, GenericViewSet):

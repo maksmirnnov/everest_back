@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, DateTimeField
-from tickets.models import Ticket, EducationTicket
+from tickets_app.models import Ticket, EducationTicket
 
 
 class TicketSerializer(ModelSerializer):
