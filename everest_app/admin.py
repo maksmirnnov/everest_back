@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Seminar, Lector, SeminarPriceItem, SeminarPriceItemFuture, SeminarProgram, SeminarRegulation, \
-    SeminarSphere, Ticket
+    SeminarSphere
 
 
 # admin.site.register(SeminarSphere)
@@ -66,11 +66,3 @@ class PriceItemFutureAdmin(admin.ModelAdmin):
 admin.site.register(SeminarPriceItemFuture, PriceItemFutureAdmin)
 
 
-class TicketAdmin(admin.ModelAdmin):
-    list_display = ('id', 'org_name', 'email', 'phone_number', 'inn', 'kpp', 'bik', 'check_acc', 'corr_acc', 'time_create')
-    list_display_links = ('id', 'org_name')
-    search_fields = ('seminar', 'org_name', 'email', 'phone_number', 'inn', 'kpp', 'bik', 'check_acc', 'corr_acc')
-    list_filter = ('seminar', 'org_name', 'time_create')
-
-
-admin.site.register(Ticket, TicketAdmin)

@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, DateTimeField
-from everest_app.models import Seminar, Lector, Ticket
+from everest_app.models import Seminar, Lector
 
 
 class SeminarSerializer(ModelSerializer):
@@ -17,12 +17,4 @@ class SeminarSerializer(ModelSerializer):
 class LectorSerializer(ModelSerializer):
     class Meta:
         model = Lector
-        fields = '__all__'
-
-
-class TicketSerializer(ModelSerializer):
-    time_create = DateTimeField(format='%d.%m.%Y %H:%M', read_only=True)
-
-    class Meta:
-        model = Ticket
         fields = '__all__'

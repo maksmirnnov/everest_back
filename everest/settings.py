@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'everest_app',
+    'tickets',
 ]
 
 MIDDLEWARE = [
@@ -200,7 +201,6 @@ DATETIME_INPUT_FORMATS = ('%d.%m.%Y %H:%M',)
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
-
 USE_TZ = True
 
 

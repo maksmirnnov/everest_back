@@ -1,12 +1,16 @@
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from everest_app.models import Seminar, Lector, Ticket
-from everest_app.serializers import SeminarSerializer, LectorSerializer, TicketSerializer
+from everest_app.models import Seminar, Lector
+from everest_app.serializers import SeminarSerializer, LectorSerializer
 
 
 def everest_page(request):
@@ -29,6 +33,15 @@ class LectorViewSet(ModelViewSet):
     filterset_fields = ['username', 'first_name', 'last_name']
 
 
-class TicketViewSet(mixins.CreateModelMixin, GenericViewSet):
-    queryset = Ticket.objects.all()
-    serializer_class = TicketSerializer
+@api_view(['POST'])
+def feedback_view(request):
+    msg = EmailMessage(
+        'Обратная связь',
+        f'Имя: {request.data.get("name")}\nEmail: {request.data.get("email")}\n\nСообщение: {request.data.get("message")}',
+        'info@coeverest.ru',
+        [f'{User.objects.filter(username="everest_admin")[0].email}'],
+    )
+
+    msg.send()
+
+    return HttpResponse('200 OK')
