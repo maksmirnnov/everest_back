@@ -1,6 +1,3 @@
-from datetime import datetime
-
-from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -102,7 +99,7 @@ class SeminarRegulation(models.Model):
 
 
 class Seminar(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    title = models.TextField(verbose_name="Заголовок")
     description = models.TextField(verbose_name='О семинаре')
     regulation = models.ManyToManyField(SeminarRegulation, verbose_name='Регламент')
     program = models.ManyToManyField(SeminarProgram, verbose_name='Программа')
@@ -110,8 +107,9 @@ class Seminar(models.Model):
     date_start = models.DateTimeField(verbose_name='Начало семинара')
     date_end = models.DateTimeField(verbose_name='Конец семинара')
     lector = models.ForeignKey(Lector, on_delete=models.SET_NULL, null=True, verbose_name="Лектор")
-    seminar_format = models.CharField(max_length=255, verbose_name='Формат семинара (через запятую)')
-    location = models.CharField(max_length=255, verbose_name="Место проведения семинара")
+    seminar_format = models.CharField(max_length=255, verbose_name='Форматы семинара')
+    location_city = models.CharField(max_length=255, verbose_name="Город проведения семинара")
+    location_place = models.CharField(max_length=255, verbose_name="Место проведения семинара")
     price = models.ManyToManyField(SeminarPriceItem, verbose_name='Прайс.')
     discount = models.TextField(verbose_name='Скидки', null=True, blank=True, help_text='На первой строке - скидка, на второй - условия', default='10%\nдействует на двух и более участников')
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
@@ -130,11 +128,3 @@ class Seminar(models.Model):
 
 def client_directory_path(instance, filename):
     return f'client_{instance}/{filename}'
-
-
-# class Client(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-#     image = models.ImageField(upload_to=client_directory_path, null=True, blank=True, verbose_name='Фото')
-#
-#     def __str__(self):
-#         return f'{self.user.username}'

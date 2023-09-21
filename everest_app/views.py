@@ -21,7 +21,7 @@ class SeminarViewSet(ModelViewSet):
     queryset = Seminar.objects.all()
     serializer_class = SeminarSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title', 'description', 'sphere', 'date_start', 'lector', 'seminar_format', 'location', 'price', 'is_actual', 'is_published']
+    filterset_fields = ['title', 'description', 'sphere', 'date_start', 'lector', 'seminar_format', 'location_city', 'location_place', 'price', 'is_actual', 'is_published']
 
 
 class LectorViewSet(ModelViewSet):
@@ -35,13 +35,12 @@ class LectorViewSet(ModelViewSet):
 
 @api_view(['POST'])
 def feedback_view(request):
-    msg = EmailMessage(
+    alert = EmailMessage(
         'Обратная связь',
         f'Имя: {request.data.get("name")}\nEmail: {request.data.get("email")}\n\nСообщение: {request.data.get("message")}',
-        'info@coeverest.ru',
-        [f'{User.objects.filter(username="everest_admin")[0].email}'],
+        'info@mail.coeverest.ru',
+        [f'{User.objects.filter(username="everest_info")[0].email}'],
     )
-
-    msg.send()
+    alert.send()
 
     return HttpResponse('200 OK')

@@ -20,6 +20,7 @@ class EducationTicket(models.Model):
 
 class Ticket(models.Model):
     seminar = models.ForeignKey(Seminar, on_delete=models.CASCADE, verbose_name='Семинар')
+    price = models.CharField(max_length=255, verbose_name='Формат участия')
     org_name = models.CharField(max_length=255, verbose_name='Название организации')
     ur_address = models.CharField(max_length=255, verbose_name='Юридический адрес')
     mail_address = models.CharField(max_length=255, verbose_name='Почтовый адрес')

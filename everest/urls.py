@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
-from everest import settings
+from . import settings
 
 
 router = SimpleRouter()
@@ -17,7 +17,7 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     path('', include('everest_app.urls')),
-    path('', include('tickets.urls')),
+    path('', include('tickets_app.urls')),
 ]
 
 urlpatterns += router.urls
