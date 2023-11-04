@@ -8,8 +8,6 @@ from . import settings
 
 router = SimpleRouter()
 
-
-
 urlpatterns = [
     path('admin__/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -18,9 +16,6 @@ urlpatterns = [
 
     path('', include('everest_app.urls')),
     path('', include('tickets_app.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += router.urls
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

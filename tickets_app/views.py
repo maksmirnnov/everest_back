@@ -32,21 +32,21 @@ class EducationTicketViewSet(mixins.CreateModelMixin, GenericViewSet):
     queryset = EducationTicket.objects.all()
     serializer_class = EducationTicketSerializer
 
-    def perform_create(self, serializer):
-        body = self.request.data
-
-        alert = EmailMessage(
-            'Заявка на корпоративное обучение',
-            f'{body}',
-            'coeverest <info@mail.coeverest.ru>',
-            [f'{User.objects.filter(username="everest_dogovor")[0].email}'],
-        )
-        alert.send()
-
-        if body["email"]:
-            req = requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6zijh7kdf7jwmgixh5ib8xf7rtkedig8ow7oubto&list_ids=3,2&fields[email]={body["email"]}&double_optin=0&overwrite=1')
-
-        serializer.save()
+    # def perform_create(self, serializer):
+    #     body = self.request.data
+    #
+    #     alert = EmailMessage(
+    #         'Заявка на корпоративное обучение',
+    #         f'{body}',
+    #         'coeverest <info@mail.coeverest.ru>',
+    #         [f'{User.objects.filter(username="everest_dogovor")[0].email}'],
+    #     )
+    #     alert.send()
+    #
+    #     if body["email"]:
+    #         req = requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6zijh7kdf7jwmgixh5ib8xf7rtkedig8ow7oubto&list_ids=3,2&fields[email]={body["email"]}&double_optin=0&overwrite=1')
+    #
+    #     serializer.save()
 
 
 # requests.post('https://api.unisender.com/ru/api/subscribe', data={
