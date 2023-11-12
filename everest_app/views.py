@@ -42,12 +42,12 @@ class SeminarPriceItemViewSet(ModelViewSet):
 
 @api_view(['POST'])
 def feedback_view(request):
-    # alert = EmailMessage(
-    #     'Обратная связь',
-    #     f'Имя: {request.data.get("name")}\nEmail: {request.data.get("email")}\n\nСообщение: {request.data.get("message")}',
-    #     'info@mail.coeverest.ru',
-    #     [f'{User.objects.filter(username="everest_info")[0].email}'],
-    # )
-    # alert.send()
+    alert = EmailMessage(
+        'Обратная связь',
+        f'Имя: {request.data.get("name")}\nEmail: {request.data.get("email")}\n\nСообщение: {request.data.get("message")}',
+        'info@mail.coeverest.ru',
+        [f'{User.objects.filter(username="everest_info")[0].email}'],
+    )
+    alert.send()
 
     return HttpResponse('200 OK')

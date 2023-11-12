@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
-    'imagekit',
     'ckeditor',
 
     'everest_app',
@@ -90,6 +89,17 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASS'),
+#         'HOST': os.environ.get('DB_HOST'),
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -195,6 +205,7 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -227,4 +238,3 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
