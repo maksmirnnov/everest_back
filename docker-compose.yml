@@ -1,0 +1,41 @@
+services:
+  everest_back:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    environment:
+      - DB_HOST=database
+      - DB_NAME=everest_db
+      - DB_USER=django
+      - DB_PASS=Eipeuw7Fi9oh
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16.0-alpine
+    environment:
+      - POSTGRES_DB=everest_db
+      - POSTGRES_USER=django
+      - POSTGRES_PASSWORD=Eipeuw7Fi9oh
+
+  redis:
+    image: redis:7.2.3-alpine
+    hostname: redis
+
+  worker:
+    build:
+      context: .
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    volumes:
+      - ./:/app
+    links:
+      - redis
+    depends_on:
+      - redis
