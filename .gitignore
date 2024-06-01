@@ -1,9 +1,6 @@
 /media
 /static
-/manage.py
-__init__.py
-asgi.py
-wsgi.py
 /venv
 /.git
 /.idea
+/__pycache__
