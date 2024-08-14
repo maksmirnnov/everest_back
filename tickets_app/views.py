@@ -39,8 +39,8 @@ class TicketViewSet(mixins.CreateModelMixin, GenericViewSet):
         )
         alert.send()
 
-        if body["email"]:
-            req = requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6g4bmkakk9yoxy5gjk5ydrggmj4iwhtri65ths6o&list_ids=17890264&fields[email]={body["email"]}&double_optin=0&overwrite=1')
+        # if body["email"]:
+        #     req = requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6g4bmkakk9yoxy5gjk5ydrggmj4iwhtri65ths6o&list_ids=17890264&fields[email]={body["email"]}&double_optin=0&overwrite=1')
 
         serializer.save()
 
@@ -65,7 +65,7 @@ class EducationTicketViewSet(mixins.CreateModelMixin, GenericViewSet):
         )
         alert.send()
 
-        if body["email"]:
-            req = requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6g4bmkakk9yoxy5gjk5ydrggmj4iwhtri65ths6o&list_ids=17890264&fields[email]={body["email"]}&double_optin=0&overwrite=1')
+        # if body["email"]:
+        #     req = requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6g4bmkakk9yoxy5gjk5ydrggmj4iwhtri65ths6o&list_ids=17890264&fields[email]={body["email"]}&double_optin=0&overwrite=1')
 
         serializer.save()

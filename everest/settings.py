@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-g@0&1(r0zebw9%&yqq+7pf=hy(+@p@)-ywq!**!r*w!k_p+5^m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'everest.smirnnov.ru', 'smirnnov.ru']
 
 
 # Application definition
@@ -72,27 +72,27 @@ WSGI_APPLICATION = 'everest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASS'),
+#         'HOST': os.environ.get('DB_HOST'),
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': os.environ.get('DB_HOST'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'everest_db',
+        'USER': 'django',
+        'PASSWORD': 'Eipeuw7Fi9oh',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'everest_db',
-#         'USER': 'django',
-#         'PASSWORD': 'Eipeuw7Fi9oh',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
 
 
 # Password validation

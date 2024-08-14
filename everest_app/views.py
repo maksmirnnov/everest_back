@@ -48,15 +48,15 @@ class SeminarPriceItemViewSet(ModelViewSet):
 @permission_classes([])
 @authentication_classes([])
 def feedback_view(request):
-    alert = EmailMessage(
-        'Обратная связь',
-        f'Имя: {request.data.get("name")}\n \
-        Email: {request.data.get("email")}\n\n \
-        Сообщение: {request.data.get("message")}',
-        'ЦО Эверест <info@mail.coeverest.ru>',
-        [f'{User.objects.filter(username="everest_info")[0].email}'],
-    )
-    alert.send()
-    requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6g4bmkakk9yoxy5gjk5ydrggmj4iwhtri65ths6o&list_ids=17890264&fields[email]={request.data.get("email")}&double_optin=0&overwrite=1')
+    # alert = EmailMessage(
+    #     'Обратная связь',
+    #     f'Имя: {request.data.get("name")}\n \
+    #     Email: {request.data.get("email")}\n\n \
+    #     Сообщение: {request.data.get("message")}',
+    #     'ЦО Эверест <info@mail.coeverest.ru>',
+    #     [f'{User.objects.filter(username="everest_info")[0].email}'],
+    # )
+    # alert.send()
+    # requests.get(f'https://api.unisender.com/ru/api/subscribe?format=json&api_key=6g4bmkakk9yoxy5gjk5ydrggmj4iwhtri65ths6o&list_ids=17890264&fields[email]={request.data.get("email")}&double_optin=0&overwrite=1')
 
     return HttpResponse('200 OK')

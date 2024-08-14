@@ -1,11 +1,11 @@
 services:
   everest_back:
     build:
-      context: .
+      context: ./everest_back/
     ports:
       - "8000:8000"
-    volumes:
-      - ./:/app
+    # volumes:
+    #   - ./everest_back/:/everest_back
     environment:
       - DB_HOST=database
       - DB_NAME=everest_db
@@ -23,19 +23,29 @@ services:
       - POSTGRES_USER=django
       - POSTGRES_PASSWORD=Eipeuw7Fi9oh
 
-  redis:
-    image: redis:7.2.3-alpine
-    hostname: redis
+  # redis:
+  #   image: redis:7.2.3-alpine
+  #   hostname: redis
 
-  worker:
-    build:
-      context: .
-    hostname: worker
-    entrypoint: celery
-    command: -A celery_app.app worker --loglevel=info
-    volumes:
-      - ./:/app
-    links:
-      - redis
-    depends_on:
-      - redis
+  # worker:
+  #   build:
+  #     context: ./everest_back/
+  #   hostname: worker
+  #   entrypoint: celery
+  #   command: -A celery_app.app worker --loglevel=info
+  #   volumes:
+  #     - ./everest_back/:/everest_back
+  #   links:
+  #     - redis
+  #   depends_on:
+  #     - redis
+
+  # everest_front:
+  #   build:
+  #     context: ./everest_front_typed/
+  #   ports:
+  #     - "3000:3000"
+  #   # volumes:
+  #   #   - ./everest_front_typed/:/everest_front
+  #   command: >
+  #     sh -c "npm start"

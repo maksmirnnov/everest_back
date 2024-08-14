@@ -14,7 +14,7 @@ class Lector(models.Model):
     surname = models.CharField(max_length=100, verbose_name='Отчество')
     description = models.TextField(null=True, blank=True, verbose_name='О лекторе', help_text='Будут отображаться '
                                                                                               'в карточке лектора.')
-    achievements = RichTextField(null=True, blank=True, verbose_name='Достижения', help_text='Будут отображаться '
+    achievements = models.TextField(null=True, blank=True, verbose_name='Достижения', help_text='Будут отображаться '       # RichTextField
                                                                                                 'на странице лектора.'
                                                                                                 ' Чтобы сделать пункт '
                                                                                                 '- перед предложением '
@@ -57,8 +57,8 @@ class Seminar(models.Model):
     title = models.TextField(verbose_name="Заголовок")
     for_whom = models.TextField(verbose_name="Целевая аудитория", null=True, blank=True)
     description = models.TextField(verbose_name='О семинаре', null=True, blank=True)
-    regulation = RichTextField(verbose_name='Регламент', help_text='**дата, *событие (карточка)', null=True, blank=True)
-    program = RichTextField(verbose_name='Программа', help_text='**дата, *событие (карточка)', null=True, blank=True)
+    regulation = models.TextField(verbose_name='Регламент', help_text='**дата, *событие (карточка)', null=True, blank=True)    # RichTextField
+    program = models.TextField(verbose_name='Программа', help_text='**дата, *событие (карточка)', null=True, blank=True)       # RichTextField
     sphere = models.ForeignKey(SeminarSphere, on_delete=models.SET_NULL, null=True, verbose_name='Сфера')
     date_start = models.DateField(verbose_name='Дата начала семинара')
     date_end = models.DateField(verbose_name='Дата окончания семинара')
