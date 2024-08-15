@@ -13,9 +13,9 @@ urlpatterns = [
     path('', everest_page),
     path('feedback/', feedback_view),
     path('seminars/', everest_page),
-    re_path(r'^seminars\/w+\/$', everest_page),
+    re_path(r'^seminars\/[\w\d\-_]+\/$', everest_page),
     path('lectors/', everest_page),
-    re_path(r'^lectors\/\w+\/$', everest_page),
+    re_path(r'^lectors\/[\w\d\-_]+\/$', everest_page),
     path('education/', everest_page),
     path('feedback/', feedback_view),
 ]
