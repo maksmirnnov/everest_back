@@ -14,7 +14,7 @@ class Lector(models.Model):
     surname = models.CharField(max_length=100, verbose_name='Отчество')
     description = models.TextField(null=True, blank=True, verbose_name='О лекторе', help_text='Будут отображаться '
                                                                                               'в карточке лектора.')
-    achievements = models.TextField(null=True, blank=True, verbose_name='Достижения', help_text='Будут отображаться '       # RichTextField
+    achievements = RichTextField(null=True, blank=True, verbose_name='Достижения', help_text='Будут отображаться '
                                                                                                 'на странице лектора.'
                                                                                                 ' Чтобы сделать пункт '
                                                                                                 '- перед предложением '
@@ -31,7 +31,7 @@ class Lector(models.Model):
     class Meta:
         verbose_name = 'Лектор'
         verbose_name_plural = 'Лекторы'
-        ordering = ['first_name']
+        ordering = ['last_name']
 
 
 class SeminarSphere(models.Model):
@@ -57,18 +57,29 @@ class Seminar(models.Model):
     title = models.TextField(verbose_name="Заголовок")
     for_whom = models.TextField(verbose_name="Целевая аудитория", null=True, blank=True)
     description = models.TextField(verbose_name='О семинаре', null=True, blank=True)
-    regulation = models.TextField(verbose_name='Регламент', help_text='**дата, *событие (карточка)', null=True, blank=True)    # RichTextField
-    program = models.TextField(verbose_name='Программа', help_text='**дата, *событие (карточка)', null=True, blank=True)       # RichTextField
+    regulation = RichTextField(verbose_name='Регламент', help_text='**дата, *событие (карточка)', null=True, blank=True)
+    program = RichTextField(verbose_name='Программа', help_text='**дата, *событие (карточка)', null=True, blank=True)
     sphere = models.ForeignKey(SeminarSphere, on_delete=models.SET_NULL, null=True, verbose_name='Сфера')
     date_start = models.DateField(verbose_name='Дата начала семинара')
     date_end = models.DateField(verbose_name='Дата окончания семинара')
     time_start = models.TimeField(verbose_name='Время начала семинара', default='10:00:00')
     time_end = models.TimeField(verbose_name='Время окончания семинара', default='17:00:00')
     lector = models.ForeignKey(Lector, on_delete=models.SET_NULL, null=True, verbose_name="Лектор")
-    seminar_format = models.ForeignKey(SeminarFormat, on_delete=models.SET_NULL, verbose_name='Формат семинара', null=True)
+    seminar_format = models.ForeignKey(
+        SeminarFormat,
+        on_delete=models.SET_NULL,
+        verbose_name='Формат семинара',
+        null=True
+    )
     location_city = models.CharField(max_length=255, verbose_name="Город проведения семинара", default='г. Москва')
     location_place = models.CharField(max_length=255, verbose_name="Место проведения семинара")
-    discount = models.TextField(verbose_name='Скидки', null=True, blank=True, help_text='На первой строке - скидка, на второй - условия', default='10%\nдействует на двух и более участников')
+    discount = models.TextField(
+        verbose_name='Скидки',
+        null=True,
+        blank=True,
+        help_text='На первой строке - скидка, на второй - условия',
+        default='10%\nдействует на двух и более участников'
+    )
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
     is_actual = models.BooleanField(default=False, verbose_name='В списке актуальных')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
@@ -87,7 +98,11 @@ class SeminarPriceItem(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок', help_text='Например: Запись семинара')
     seminar = models.ForeignKey(Seminar, on_delete=models.SET_NULL, null=True, verbose_name='Семинар')
     price = models.IntegerField(null=False, blank=False, verbose_name='Цена')
-    features = models.TextField(verbose_name='Дополнения к прайсу', help_text='ДОБАВИТЬ ОПИСАНИЕ')
+    features = models.TextField(
+        verbose_name='Дополнения к прайсу',
+        help_text='+ в начале строки = галочка на странице в прайсе',
+        default='+Обед\n+Методические материалы (презентации)\nИменной сертификат участника\nКонсультация'
+    )
 
     def __str__(self):
         return f'{self.id}. {self.title} - {self.price}р'
