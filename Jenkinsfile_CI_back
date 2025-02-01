@@ -13,12 +13,12 @@ pipeline {
             steps {
                 sh "docker-compose up -d"
                 sh '''
-                    docker-compose logs everest_back
                     cat docker-compose.yml
                     cat Dockerfile
                     ls -lha
                     pwd
                     sleep 10
+                    docker-compose logs everest_back
                 '''
             }
         }
