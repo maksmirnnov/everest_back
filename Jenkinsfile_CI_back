@@ -16,6 +16,7 @@ pipeline {
         }
         stage('Test request') {
             steps {
+                sh "apk add curl"
                 sh '''
                     echo $(curl --write-out \"%{http_code}\" --silent --output /dev/null http://localhost:8000/) > status_code.txt
                     if [ "\"200\"" == $(cat status_code.txt) ]
