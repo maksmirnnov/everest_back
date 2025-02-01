@@ -5,16 +5,17 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./everest_back/:/everest_back
+      - ./:/everest_back
     environment:
       - DB_HOST=database
       - DB_NAME=everest_db
       - DB_USER=django
       - DB_PASS=Eipeuw7Fi9oh
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "sleep 10 && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - database
+    restart: on-failure:5
 
   database:
     image: postgres:16.0-alpine
