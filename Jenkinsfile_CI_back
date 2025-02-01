@@ -9,14 +9,6 @@ pipeline {
     }
 
     stages {
-        stage('Create venv') {
-            steps {
-                echo "Start creating venv"
-                sh "python -m venv ./venv"
-                sh "source ./venv/bin/activate"
-                echo "Venv created"
-            }
-        }
         stage('Install dependencies') {
             steps {
                 echo "Start install dependencies"
