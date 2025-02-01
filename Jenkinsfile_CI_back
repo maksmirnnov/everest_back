@@ -27,7 +27,10 @@ pipeline {
         stage('Test start') {
             steps {
                 echo "Starting"
-                sh '''nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt'''
+                sh '''
+                    nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt
+                    sleep 10
+                '''
                 echo "Successful started"
             }
         }
@@ -40,6 +43,7 @@ pipeline {
                             cat status_code.txt
                         else
                             echo "ERROR: Response code is not equals 200"
+                            echo "Status code is $(cat status_code.txt)"
                             exit 1
                     fi
                 '''
