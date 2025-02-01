@@ -1,6 +1,6 @@
 pipeline {
     agent {docker {
-        image 'docker/compose'
+        image 'docker/compose-bin'
         args '-u root'
     }}
 
