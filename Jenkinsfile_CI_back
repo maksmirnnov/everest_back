@@ -1,14 +1,21 @@
 pipeline {
     agent {docker {
-        image 'python:latest'
+        image 'python:bullseye'
     }}
 
     options {
         timeout(time: 1, unit: 'HOURS')
-        retry(2)
     }
 
     stages {
+        stage('Create venv') {
+            steps {
+                echo "Start creating venv"
+                sh "python -m venv ./venv"
+                sh "source ./venv/bin/activate"
+                echo "Venv created"
+            }
+        }
         stage('Install dependencies') {
             steps {
                 echo "Start install dependencies"
