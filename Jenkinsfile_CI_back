@@ -12,8 +12,14 @@ pipeline {
         stage('Compose start') {
             steps {
                 sh "docker-compose up -d"
-                sh "sleep 20"
-                sh "docker-compose logs everest_back"
+                sh '''
+                    docker-compose logs everest_back"
+                    cat docker-compose.yml"
+                    cat Dockerfile
+                    ls -lha
+                    pwd
+                    sleep 10
+                '''
             }
         }
         stage('Test request') {
