@@ -4,8 +4,8 @@ services:
       context: ./
     ports:
       - "8000:8000"
-    volumes:
-      - ./:/everest_back
+    # volumes:
+    #   - ./:/everest_back
     environment:
       - DB_HOST=database
       - DB_NAME=everest_db
