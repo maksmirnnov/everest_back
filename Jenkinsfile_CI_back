@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Start creating venv"
                 sh "python -m venv ./venv"
-                sh ". /venv/bin/activate"
+                sh ". ./venv/bin/activate"
                 echo "Venv created"
             }
         }
