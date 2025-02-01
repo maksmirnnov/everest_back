@@ -49,7 +49,7 @@ pipeline {
                 echo "test start log:"
                 sh "cat test_start.log"
                 echo "--- --- ---"
-                sh "kill $(cat save_pid.txt)"
+                sh '''kill $(cat save_pid.txt)'''
                 sh "rm save_pid.txt"
                 sh "rm test_start.txt"
                 echo "Successful stoped"
