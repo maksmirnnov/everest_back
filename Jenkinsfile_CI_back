@@ -1,41 +1,17 @@
 pipeline {
     agent {docker {
-        image 'python:latest'
-        args '-u root'
+        image 'docker/compose'
+        args '-u root --privileged'
     }}
 
     options {
         timeout(time: 1, unit: 'HOURS')
     }
 
-    stages {
-        stage('Create venv') {
+    stages('Compose start') {
+        stage {
             steps {
-                echo "Start creating venv"
-                sh "python -m venv ./venv"
-                sh ". ./venv/bin/activate"
-                echo "Venv created"
-            }
-        }
-        stage('Install dependencies') {
-            steps {
-                echo "Start install dependencies"
-                sh "pip install -r requirements.txt --root-user-action ignore"
-                echo "End install dependencies"
-            }
-        }
-        stage('Test start') {
-            steps {
-                echo "Starting"
-                sh '''
-                    nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt
-                    sleep 10
-                    echo "--- --- ---"
-                    echo "test start log:"
-                    sh "cat test_start.log"
-                    echo "--- --- ---"
-                '''
-                echo "Successful started"
+                sh "docker compose up -d"
             }
         }
         stage('Test request') {
@@ -53,12 +29,13 @@ pipeline {
                 '''
             }
         }
-        stage('Stop test server') {
+        stage('Compose down') {
             steps {
                 echo "Stoping"
-                sh '''kill $(cat save_pid.txt)'''
-                sh "rm save_pid.txt"
-                sh "rm test_start.txt"
+                sh '''
+                    docker-compose down
+                    rm status_code.txt
+                '''
                 echo "Successful stoped"
             }
         }
