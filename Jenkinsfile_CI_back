@@ -32,16 +32,18 @@ pipeline {
             }
         }
         stage('Test request') {
-            sh '''
-                echo $(curl --write-out \"%{http_code}\" --silent --output /dev/null http://localhost:8000/) > status_code.txt
-                if [ "\"200\"" == $(cat status_code.txt) ]
-                    then
-                        cat status_code.txt
-                    else
-                        echo "ERROR: Response code is not equals 200"
-                        exit 1
-                fi
-            '''
+            steps {
+                sh '''
+                    echo $(curl --write-out \"%{http_code}\" --silent --output /dev/null http://localhost:8000/) > status_code.txt
+                    if [ "\"200\"" == $(cat status_code.txt) ]
+                        then
+                            cat status_code.txt
+                        else
+                            echo "ERROR: Response code is not equals 200"
+                            exit 1
+                    fi
+                '''
+            }
         }
         stage('Stop test server') {
             steps {
