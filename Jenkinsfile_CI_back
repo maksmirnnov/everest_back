@@ -30,6 +30,10 @@ pipeline {
                 sh '''
                     nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt
                     sleep 10
+                    echo "--- --- ---"
+                    echo "test start log:"
+                    sh "cat test_start.log"
+                    echo "--- --- ---"
                 '''
                 echo "Successful started"
             }
@@ -52,10 +56,6 @@ pipeline {
         stage('Stop test server') {
             steps {
                 echo "Stoping"
-                echo "--- --- ---"
-                echo "test start log:"
-                sh "cat test_start.log"
-                echo "--- --- ---"
                 sh '''kill $(cat save_pid.txt)'''
                 sh "rm save_pid.txt"
                 sh "rm test_start.txt"
