@@ -12,6 +12,8 @@ pipeline {
         stage('Compose start') {
             steps {
                 sh "docker-compose up -d"
+                sh "sleep 20"
+                sh "docker-compose logs everest_back"
             }
         }
         stage('Test request') {
