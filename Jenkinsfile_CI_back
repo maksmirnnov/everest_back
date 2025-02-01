@@ -15,6 +15,7 @@ pipeline {
                 sh '''
                     cat docker-compose.yml
                     cat Dockerfile
+                    cat Jenkinsfile_CI_back
                     ls -lha
                     pwd
                     sleep 10
