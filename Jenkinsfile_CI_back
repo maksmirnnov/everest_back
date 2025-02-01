@@ -15,7 +15,6 @@ pipeline {
                 sh '''
                     ls -lha
                     pwd
-                    ls /everest_back
                     sleep 10
                     docker-compose logs everest_back
                 '''
