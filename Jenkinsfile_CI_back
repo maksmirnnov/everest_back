@@ -20,7 +20,7 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 echo "Start install dependencies"
-                sh "pip install -r requirements.txt"
+                sh "pip install -r requirements.txt --root-user-action"
                 echo "End install dependencies"
             }
         }
