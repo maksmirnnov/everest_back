@@ -13,11 +13,9 @@ pipeline {
             steps {
                 sh "docker-compose up -d"
                 sh '''
-                    cat docker-compose.yml
-                    cat Dockerfile
-                    cat Jenkinsfile_CI_back
                     ls -lha
                     pwd
+                    ls /everest_back
                     sleep 10
                     docker-compose logs everest_back
                 '''
@@ -50,10 +48,10 @@ pipeline {
             }
         }
     }
-    post {
-        // Clean after build
-        always {
-            cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
-        }
-    }
+    // post {
+    //     // Clean after build
+    //     always {
+    //         cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
+    //     }
+    // }
 }
