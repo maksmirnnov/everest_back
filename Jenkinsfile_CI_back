@@ -27,7 +27,7 @@ pipeline {
         stage('Test start') {
             steps {
                 echo "Starting"
-                sh "nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt"
+                sh '''nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt'''
                 echo "Successful started"
             }
         }
