@@ -12,7 +12,7 @@ services:
       - DB_USER=django
       - DB_PASS=Eipeuw7Fi9oh
     command: >
-      sh -c "sleep 10 && python manage.py runserver 0.0.0.0:8000"
+      sh -c "ls -lha && pwd && sleep 10 && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - database
     restart: on-failure:5
