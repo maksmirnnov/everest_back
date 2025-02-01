@@ -1,0 +1,59 @@
+pipeline {
+    agent {docker {
+        image 'python:latest'
+    }}
+
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        retry(2)
+    }
+
+    stages {
+        stage('Create venv') {
+            steps {
+                echo "Start creating venv"
+                sh "python -m venv ./venv"
+                sh "source ./venv/bin/activate"
+                echo "Venv created"
+            }
+        }
+        stage('Install dependencies') {
+            steps {
+                echo "Start install dependencies"
+                sh "pip install -r requirements.txt"
+                echo "End install dependencies"
+            }
+        }
+        stage('Test start') {
+            steps {
+                echo "Starting"
+                sh "nohup python manage.py runserver &> test_start.log & echo $! > save_pid.txt"
+                echo "Successful started"
+            }
+        }
+        stage('Test request') {
+            HTTP_CODE = sh (
+                script: 'echo $(curl --write-out \"%{http_code}\" --silent --output /dev/null http://localhost:8000/)',
+                returnStdout: true
+            ).trim()
+
+            if ("200" != HTTP_CODE) {
+                currentBuild.result = "FAILURE"
+                error('Request stage failed!')
+            }
+        }
+        stage('Stop test server') {
+            steps {
+                echo "Stoping"
+                echo "--- --- ---"
+                echo "test start log:"
+                sh "cat test_start.log"
+                echo "--- --- ---"
+                sh "kill $(cat save_pid.txt)"
+                sh "rm save_pid.txt"
+                sh "rm test_start.txt"
+                echo "Successful stoped"
+            }
+        }
+    }
+}
