@@ -1,6 +1,7 @@
 pipeline {
     agent {docker {
         image 'python:latest'
+        args '-u root'
     }}
 
     options {
