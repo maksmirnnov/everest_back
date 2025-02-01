@@ -8,8 +8,8 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
 
-    stages('Compose start') {
-        stage {
+    stages {
+        stage('Compose start') {
             steps {
                 sh "docker compose up -d"
             }
