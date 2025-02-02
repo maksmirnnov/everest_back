@@ -45,10 +45,10 @@ pipeline {
             }
         }
     }
-    // post {
-    //     // Clean after build
-    //     always {
-    //         cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
-    //     }
-    // }
+    post {
+        // Clean after build
+        always {
+            cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
+        }
+    }
 }
