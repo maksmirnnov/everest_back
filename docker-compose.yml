@@ -4,15 +4,13 @@ services:
       context: ./
     ports:
       - "8000:8000"
-    # volumes:
-    #   - ./:/everest_back
     environment:
       - DB_HOST=database
       - DB_NAME=everest_db
       - DB_USER=django
       - DB_PASS=Eipeuw7Fi9oh
     command: >
-      sh -c "ls -lha && sleep 20 && python manage.py runserver 0.0.0.0:8000"
+      sh -c "sleep 20 && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - database
     restart: on-failure:5
