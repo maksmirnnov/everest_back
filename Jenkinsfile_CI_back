@@ -50,5 +50,37 @@ pipeline {
         always {
             cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
         }
+
+        // Manualy stop and delete docker conytainers and images
+        failure {
+            sh '''
+                container_names=($(docker ps -a --format {{.Names}}))
+                image_names=($(docker images --format {{.Repository}}))
+
+                if [ ${#container_names[*]} > 1 ]
+                then
+                    for container in ${container_names[*]}
+                    do
+                        if [ $container != "jenkins" ]
+                        then
+                                if [ $(docker inspect $container --format {{.State.Status}}) == "running" ]
+                                then
+                                    docker stop $container
+                                    docker rm $container
+                                else
+                                    docker rm $container
+                                fi
+                        fi
+                    done
+                    for image_name in ${image_names[*]}
+                    do
+                        if [ $image_name != "jenkins/jenkins" ]
+                        then
+                            docker rmi $image_name
+                        fi
+                    done
+                fi
+            '''
+        }
     }
 }
