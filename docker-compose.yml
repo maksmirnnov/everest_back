@@ -10,7 +10,7 @@ services:
       - DB_USER=django
       - DB_PASS=Eipeuw7Fi9oh
     command: >
-      sh -c "sleep 20 && python manage.py runserver 0.0.0.0:8000"
+      sh -c "sleep 20 && gunicorn --bind 0.0.0.0:8000 --workers 3 everest.wsgi:application"
     depends_on:
       - database
     restart: on-failure:5
@@ -38,13 +38,3 @@ services:
   #     - redis
   #   depends_on:
   #     - redis
-
-  # everest_front:
-  #   build:
-  #     context: ./everest_front_typed/
-  #   ports:
-  #     - "3000:3000"
-  #   # volumes:
-  #   #   - ./everest_front_typed/:/everest_front
-  #   command: >
-  #     sh -c "npm start"
