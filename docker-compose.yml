@@ -31,7 +31,6 @@ services:
   
   nginx:
     image: nginx:stable-alpine
-    user: root
     ports:
       - 80:80
     volumes:
