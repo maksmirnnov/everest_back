@@ -61,7 +61,7 @@ pipeline {
                 then
                     for container in $container_names;
                     do
-                        if [ "$container" != "jenkins" ] && [ "$(docker inspect jenkins --format {{.Config.Image}})" != "docker:latest" ];
+                        if [ "$container" != "jenkins" ] && [ "$(docker inspect "$container" --format {{.Config.Image}})" != "docker:latest" ];
                         then
                             status=$(docker inspect --format='{{.State.Status}}' "$container")
                             if [ "$status" = "running" ];
