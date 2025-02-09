@@ -45,41 +45,41 @@ pipeline {
             }
         }
     }
-    post {
-        // Clean after build
-        always {
-            cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
-        }
+    // post {
+    //     // Clean after build
+    //     always {
+    //         cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
+    //     }
 
-        // Manualy stop and delete docker containers and images
-        failure {
-            sh '''
-                container_names=$(docker ps -a --format '{{.Names}}')
-                image_names=$(docker images --format '{{.Repository}}')
+    //     // Manualy stop and delete docker containers and images
+    //     failure {
+    //         sh '''
+    //             container_names=$(docker ps -a --format '{{.Names}}')
+    //             image_names=$(docker images --format '{{.Repository}}')
 
-                if [ "$(echo "$container_names" | wc -l)" -gt 1 ];
-                then
-                    for container in $container_names;
-                    do
-                        if [ "$container" != "jenkins" ] && [ "$(docker inspect "$container" --format {{.Config.Image}})" != "docker:latest" ];
-                        then
-                            status=$(docker inspect --format='{{.State.Status}}' "$container")
-                            if [ "$status" = "running" ];
-                            then
-                                docker stop "$container"
-                            fi
-                            docker rm "$container"
-                        fi
-                    done
-                    for image_name in $image_names;
-                    do
-                        if [ "$image_name" != "jenkins/jenkins" ] && [ "$image_name" != "docker:latest" ];
-                        then
-                            docker rmi "$image_name"
-                        fi
-                    done
-                fi
-            '''
-        }
-    }
+    //             if [ "$(echo "$container_names" | wc -l)" -gt 1 ];
+    //             then
+    //                 for container in $container_names;
+    //                 do
+    //                     if [ "$container" != "jenkins" ] && [ "$(docker inspect "$container" --format {{.Config.Image}})" != "docker:latest" ];
+    //                     then
+    //                         status=$(docker inspect --format='{{.State.Status}}' "$container")
+    //                         if [ "$status" = "running" ];
+    //                         then
+    //                             docker stop "$container"
+    //                         fi
+    //                         docker rm "$container"
+    //                     fi
+    //                 done
+    //                 for image_name in $image_names;
+    //                 do
+    //                     if [ "$image_name" != "jenkins/jenkins" ] && [ "$image_name" != "docker:latest" ];
+    //                     then
+    //                         docker rmi "$image_name"
+    //                     fi
+    //                 done
+    //             fi
+    //         '''
+    //     }
+    // }
 }
