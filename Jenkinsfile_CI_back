@@ -57,18 +57,24 @@ pipeline {
                 container_names=$(docker ps -a --format '{{.Names}}')
                 image_names=$(docker images --format '{{.Repository}}')
 
-                if [ "$(echo "$container_names" | wc -l)" -gt 1 ]; then
-                    for container in $container_names; do
-                        if [ "$container" != "jenkins" ]; then
+                if [ "$(echo "$container_names" | wc -l)" -gt 1 ];
+                then
+                    for container in $container_names;
+                    do
+                        if [ "$container" != "jenkins" ] && [ "$(docker inspect jenkins --format {{.Config.Image}})" != "docker:latest" ];
+                        then
                             status=$(docker inspect --format='{{.State.Status}}' "$container")
-                            if [ "$status" = "running" ]; then
+                            if [ "$status" = "running" ];
+                            then
                                 docker stop "$container"
                             fi
                             docker rm "$container"
                         fi
                     done
-                    for image_name in $image_names; do
-                        if [ "$image_name" != "jenkins/jenkins" ]; then
+                    for image_name in $image_names;
+                    do
+                        if [ "$image_name" != "jenkins/jenkins" ] && [ "$image_name" != "docker:latest" ];
+                        then
                             docker rmi "$image_name"
                         fi
                     done
