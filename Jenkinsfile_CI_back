@@ -21,7 +21,6 @@ pipeline {
         }
         stage('Test request') {
             steps {
-                sh "apk add curl"
                 sh '''
                     docker exec -i everest_back-everest_back-1 curl --write-out \"%{http_code}\" --silent --output /dev/null http://127.0.0.1/ > status_code.txt
                     if [ "\"200\"" == $(cat status_code.txt) ]
@@ -54,8 +53,9 @@ pipeline {
 
         // Manualy stop and delete docker containers and images
         failure {
-            sh '''
-                container_names=($(docker ps -a --format {{.Names}}))
+            sh '''#!/bin/bash
+            
+                container_names=($(docker ps -a --format {{.Names}}:{{.Tag}}))
                 image_names=($(docker images --format {{.Repository}}))
 
                 if [ ${#container_names[*]} > 1 ]
@@ -75,7 +75,7 @@ pipeline {
                     done
                     for image_name in ${image_names[*]}
                     do
-                        if [ $image_name != "jenkins/jenkins" ]
+                        if [ $image_name != "jenkins/jenkins:lts" ]
                         then
                             docker rmi $image_name
                         fi
