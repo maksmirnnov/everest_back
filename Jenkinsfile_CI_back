@@ -54,9 +54,9 @@ pipeline {
         // Manualy stop and delete docker containers and images
         failure {
             sh '''#!/bin/bash
-            
-                container_names=($(docker ps -a --format {{.Names}}:{{.Tag}}))
-                image_names=($(docker images --format {{.Repository}}))
+
+                container_names=($(docker ps -a --format {{.Names}}))
+                image_names=($(docker images --format {{.Repository}}:{{.Tag}}))
 
                 if [ ${#container_names[*]} > 1 ]
                 then
