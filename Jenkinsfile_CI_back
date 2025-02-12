@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage('Compose start') {
             steps {
+                sh "chmod -R 777 *"
                 sh "docker-compose up -d"
                 sh '''
                     sleep 40
