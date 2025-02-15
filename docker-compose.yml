@@ -4,9 +4,6 @@ services:
       context: ./
     volumes:
       - static_volume:/everest_back/static
-      - nginx_conf_volume:/everest_back/nginx/nginx.conf
-      - sites_enabled_volume:/everest_back/nginx/sites-enabled/
-      - proxy_params_volume:/everest_back/nginx/proxy_params
     environment:
       - DB_HOST=database
       - DB_NAME=everest_db
@@ -37,18 +34,15 @@ services:
     ports:
       - 80:80
     volumes:
-      - nginx_conf_volume:/etc/nginx/nginx.conf
-      - sites_enabled_volume:/etc/nginx/sites-enabled/
-      - proxy_params_volume:/etc/nginx/proxy_params
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/proxy_params:/etc/nginx/proxy_params
       - static_volume:/etc/nginx/static:ro
     depends_on:
       - everest_back
 
 volumes:
   static_volume:
-  nginx_conf_volume:
-  sites_enabled_volume:
-  proxy_params_volume:
 
 
   # redis:
