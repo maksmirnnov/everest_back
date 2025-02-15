@@ -38,7 +38,7 @@ services:
       - 80:80
     volumes:
       - nginx_conf_volume:/etc/nginx/nginx.conf
-      - sites_enabled_volume/:/etc/nginx/sites-enabled/
+      - sites_enabled_volume:/etc/nginx/sites-enabled/
       - proxy_params_volume:/etc/nginx/proxy_params
       - static_volume:/etc/nginx/static:ro
     depends_on:
