@@ -43,7 +43,7 @@ pipeline {
         // Clean after build
         always {
             sh "docker-compose down"
-            sh "docker-compose down"
+            sh "docker-compose down -v"
             cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
         }
 
