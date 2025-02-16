@@ -13,10 +13,10 @@ pipeline {
         stage('Compose start') {
             steps {
                 sh "docker-compose up -d"
-                // sh '''
-                //     sleep 25
-                //     docker-compose logs
-                // '''
+                sh '''
+                    sleep 25
+                    docker-compose logs
+                '''
             }
         }
         stage('Test request') {
