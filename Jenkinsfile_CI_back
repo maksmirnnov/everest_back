@@ -22,13 +22,16 @@ pipeline {
         stage('Test request') {
             steps {
                 sh '''
-                    docker exec -i everest_back-everest_back-1 curl --write-out \"%{http_code}\" --silent --output /dev/null http://127.0.0.1/ > status_code.txt
-                    if [ "\"200\"" == $(cat status_code.txt) ]
+                    curl --write-out \"%{http_code}\" --silent --output /dev/null http://127.0.0.1/ -H "Host: everest.smirnnov.ru" > status_code200.txt
+                    curl --write-out \"%{http_code}\" --silent --output /dev/null http://127.0.0.1/ > status_code400.txt
+                    if [ "\"200\"" == $(cat status_code.txt) ] && [ "\"400\"" == $(cat status_code400.txt) ]
                         then
+                            cat status_code.txt
                             cat status_code.txt
                         else
                             echo "ERROR: Response code is not equals 200"
                             echo "Status code is $(cat status_code.txt)"
+                            echo "Status code is $(cat status_code400.txt)"
                             exit 1
                     fi
                 '''
