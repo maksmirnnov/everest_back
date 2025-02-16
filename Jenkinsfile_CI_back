@@ -14,8 +14,8 @@ pipeline {
             steps {
                 sh "docker-compose up -d"
                 sh '''
-                    sleep 40
-                    docker-compose logs everest_back
+                    sleep 60
+                    docker-compose logs
                 '''
             }
         }
