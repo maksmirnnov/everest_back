@@ -39,8 +39,11 @@ services:
       context: ./nginx/
       args:
         - NGINX_PORT=${NGINX_PORT}
+    environment:
+      - BACK_PORT=${BACK_PORT}
+      - NGINX_PORT=${NGINX_PORT}
     ports:
-      - ${NGINX_PORT}:80
+      - ${NGINX_PORT}:${NGINX_PORT}
     volumes:
       - static_volume:/etc/nginx/static:ro
     depends_on:
