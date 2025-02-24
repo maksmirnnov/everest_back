@@ -1,10 +1,13 @@
+env BACK_PORT;
+env NGINX_PORT;
+
 upstream gunicorn_server {
-    server everest_back:8000 fail_timeout=0;
+    server everest_back:$BACK_PORT fail_timeout=0;
 }
 
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server ipv6only=on;
+    listen $NGINX_PORT default_server;
+    listen [::]:$NGINX_PORT default_server ipv6only=on;
 
     server_name localhost;
     

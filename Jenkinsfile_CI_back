@@ -38,8 +38,8 @@ pipeline {
     post {
         // Clean after build
         always {
-            sh "docker-compose down"
-            sh "docker-compose down -v"
+            sh "docker-compose --project-name everest_back_test down"
+            sh "docker-compose --project-name everest_back_test down -v"
             cleanWs deleteDirs: true, disableDeferredWipeout: true, notFailBuild: true
         }
 
