@@ -1,6 +1,3 @@
-env BACK_PORT;
-env NGINX_PORT;
-
 upstream gunicorn_server {
     server everest_back:$BACK_PORT fail_timeout=0;
 }
