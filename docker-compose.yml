@@ -4,6 +4,7 @@ services:
       context: ./
     volumes:
       - static_volume:/everest_back/static
+      - nginx_templates_volume:/everest_back/nginx/templates
     environment:
       - DB_HOST=database
       - DB_NAME=everest_db
@@ -43,13 +44,14 @@ services:
       - ${NGINX_PORT}:${NGINX_PORT}
     volumes:
       - static_volume:/etc/nginx/static:ro
-      - ./nginx/templates:/etc/nginx/templates
+      - nginx_templates_volume:/etc/nginx/templates:ro
     depends_on:
       - everest_back
 
 volumes:
   static_volume:
   pgdata:
+  nginx_templates_volume:
 
 
   # redis:
