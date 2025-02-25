@@ -11,7 +11,6 @@ pipeline {
                 sh "docker-compose --env-file .env.test --project-name everest_back_test up -d"
                 sh '''
                     sleep 25
-                    docker-compose logs
                 '''
             }
         }
