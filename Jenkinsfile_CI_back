@@ -19,8 +19,8 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
 
-                    docker exec -i everest_back-nginx-1 curl --write-out %{http_code} --silent --output /dev/null -H "Host: everest.smirnnov.ru" http://127.0.0.1:81/ > status_code200.txt
-                    docker exec -i everest_back-nginx-1 curl --write-out %{http_code} --silent --output /dev/null http://127.0.0.1:81/ > status_code400.txt
+                    docker exec -i everest_back_test-nginx-1 curl --write-out %{http_code} --silent --output /dev/null -H "Host: everest.smirnnov.ru" http://127.0.0.1:81/ > status_code200.txt
+                    docker exec -i everest_back_test-nginx-1 curl --write-out %{http_code} --silent --output /dev/null http://127.0.0.1:81/ > status_code400.txt
                     if [ "200" == $(cat status_code200.txt) ] && [ "400" == $(cat status_code400.txt) ]
                         then
                             cat status_code200.txt

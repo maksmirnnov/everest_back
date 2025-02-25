@@ -2,8 +2,8 @@ services:
   everest_back:
     build:
       context: ./
-      args:
-        - EXPOSE_PORT=${BACK_PORT}
+      # args:
+      #   - EXPOSE_PORT=${BACK_PORT}
     volumes:
       - static_volume:/everest_back/static
     environment:
@@ -37,15 +37,17 @@ services:
   nginx:
     build:
       context: ./nginx/
-      args:
-        - NGINX_PORT=${NGINX_PORT}
+      # args:
+      #   - NGINX_PORT=${NGINX_PORT}
     environment:
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/sites-enabled
       - BACK_PORT=${BACK_PORT}
       - NGINX_PORT=${NGINX_PORT}
     ports:
       - ${NGINX_PORT}:${NGINX_PORT}
     volumes:
       - static_volume:/etc/nginx/static:ro
+      - ./nginx/templates:/etc/nginx/templates
     depends_on:
       - everest_back
 
