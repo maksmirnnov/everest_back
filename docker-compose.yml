@@ -25,7 +25,7 @@ services:
     restart: always
 
   database:
-    image: postgres:17.2-alpine
+    image: postgres:17.4-alpine
     environment:
       - POSTGRES_DB=everest_db
       - POSTGRES_USER=django
