@@ -20,9 +20,9 @@ services:
       "
     depends_on:
       - database
-    restart: on-failure:5
     expose:
       - ${BACK_PORT}
+    restart: always
 
   database:
     image: postgres:17.2-alpine
@@ -32,6 +32,7 @@ services:
       - POSTGRES_PASSWORD=Eipeuw7Fi9oh
     volumes:
       - pgdata:/var/lib/postgresql/data
+    restart: always
   
   nginx:
     build:
@@ -47,6 +48,7 @@ services:
       - nginx_templates_volume:/etc/nginx/templates:ro
     depends_on:
       - everest_back
+    restart: always
 
 volumes:
   static_volume:

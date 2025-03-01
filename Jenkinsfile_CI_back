@@ -9,9 +9,7 @@ pipeline {
         stage('Compose start') {
             steps {
                 sh "docker-compose --env-file .env.test --project-name everest_back_test up -d"
-                sh '''
-                    sleep 25
-                '''
+                sh "sleep 25"
             }
         }
         stage('Test request') {
@@ -31,6 +29,12 @@ pipeline {
                             exit 1
                     fi
                 '''
+            }
+        }
+        stage('CD') {
+            steps {
+                sh "docker-compose --env-file .env.prod --project-name everest_back build"
+                sh "docker-compose --env-file .env.prod --project-name everest_back up -d --force-recreate"
             }
         }
     }
