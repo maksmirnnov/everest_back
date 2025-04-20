@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g@0&1(r0zebw9%&yqq+7pf=hy(+@p@)-ywq!**!r*w!k_p+5^m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['everest.smirnnov.ru', 'smirnnov.ru']
+ALLOWED_HOSTS = ['everest.smirnnov.ru']
 
 # Application definition
 
@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'django_filters',
-    'ckeditor',
 
     'everest_app',
     'tickets_app',
@@ -155,7 +154,6 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
     ),
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
