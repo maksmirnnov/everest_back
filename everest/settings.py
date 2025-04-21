@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g@0&1(r0zebw9%&yqq+7pf=hy(+@p@)-ywq!**!r*w!k_p+5^m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['everest.smirnnov.ru']
 
@@ -169,9 +169,9 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://everest.smirnnov.ru",
-    "https://coeverest.ru",
-    "http://localhost:3000",
-    "http://192.168.56.1"
+    "https://everest.smirnnov.ru",
+    "http://smirnnov.ru",
+    "https://smirnnov.ru",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -186,12 +186,6 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
     "x-access_token",
 ]
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-    },
-}
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 
