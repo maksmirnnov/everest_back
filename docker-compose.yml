@@ -54,6 +54,7 @@ services:
 
 volumes:
   static_volume:
+  media_volume:
   pgdata:
   nginx_templates_volume:
 
