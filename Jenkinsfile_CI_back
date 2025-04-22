@@ -29,6 +29,17 @@ pipeline {
                             exit 1
                     fi
                 '''
+                sh 'rm status_code*.txt'
+            }
+        }
+        stage('Copy Archive') {
+            steps {
+                script {
+                    step ([$class: 'CopyArtifact',
+                        projectName: 'everest_front',
+                        filter: "build/*",
+                        target: 'templates/everest_app/']);
+                }
             }
         }
         stage('CD') {

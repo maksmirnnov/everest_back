@@ -17,10 +17,18 @@ server {
     }
 
     location /static {
-        alias           /etc/nginx/static;
+        alias           /etc/nginx/static/static;
     }
 
     location /assets {
-        alias           /etc/nginx/static;
+        alias           /etc/nginx/static/assets;
+    }
+
+    location /media {
+        alias           /etc/nginx/media;
+    }
+
+    location=/favicon.ico {
+        alias           /etc/nginx/static/favicon.ico;
     }
 }

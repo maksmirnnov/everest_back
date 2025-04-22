@@ -4,6 +4,7 @@ services:
       context: ./
     volumes:
       - static_volume:/everest_back/static
+      - media_volume:/everest_back/media
       - nginx_templates_volume:/everest_back/nginx/templates
     environment:
       - DB_HOST=database
@@ -45,6 +46,7 @@ services:
       - ${NGINX_PORT}:${NGINX_PORT}
     volumes:
       - static_volume:/etc/nginx/static:ro
+      - media_volume:/etc/nginx/media:ro
       - nginx_templates_volume:/etc/nginx/templates:ro
     depends_on:
       - everest_back

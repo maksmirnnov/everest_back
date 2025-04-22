@@ -214,8 +214,9 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "templates/everest_app/static/"),
-    os.path.join(BASE_DIR, "templates/everest_app/assets/"),
+    # os.path.join(BASE_DIR, "templates/everest_app/static/"),
+    # os.path.join(BASE_DIR, "templates/everest_app/assets/"),
+    os.path.join(BASE_DIR, "templates/everest_app"),
 ]
 
 # Default primary key field type
