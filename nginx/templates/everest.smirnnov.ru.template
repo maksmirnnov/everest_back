@@ -28,7 +28,7 @@ server {
         alias           /etc/nginx/media;
     }
 
-    location=/favicon.ico {
+    location = /favicon.ico {
         alias           /etc/nginx/static/favicon.ico;
     }
 }
