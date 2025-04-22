@@ -31,16 +31,16 @@ pipeline {
                 '''
             }
         }
-        stage('Copy Archive') {
-            steps {
-                script {
-                    step ([$class: 'CopyArtifact',
-                        projectName: 'everest_front',
-                        filter: "build/*",
-                        target: 'templates/everest_app/']);
-                }
-            }
-        }
+        // stage('Copy Archive') {
+        //     steps {
+        //         script {
+        //             step ([$class: 'CopyArtifact',
+        //                 projectName: 'everest_front',
+        //                 filter: "build/*",
+        //                 target: 'templates/everest_app/']);
+        //         }
+        //     }
+        // }
         stage('CD') {
             steps {
                 sh "docker-compose --env-file .env.prod --project-name everest_back build"
