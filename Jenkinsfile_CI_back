@@ -29,7 +29,6 @@ pipeline {
                             exit 1
                     fi
                 '''
-                sh 'rm status_code*.txt'
             }
         }
         stage('Copy Archive') {
