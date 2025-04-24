@@ -20,6 +20,10 @@ server {
         alias           /etc/nginx/static/static;
     }
 
+    location /static/admin {
+        alias           /etc/nginx/static/admin;
+    }
+
     location /assets {
         alias           /etc/nginx/static/assets;
     }
