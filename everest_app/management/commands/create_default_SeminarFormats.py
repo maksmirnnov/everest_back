@@ -10,6 +10,7 @@ class Command(BaseCommand):
             SeminarFormat(format='Онлайн'),
             SeminarFormat(format='Очно'),
             SeminarFormat(format='Очно и онлайн')
-        ])
+        ],
+        ignore_conflicts=True)
 
         print('All default cats updated. Have a nice day!')

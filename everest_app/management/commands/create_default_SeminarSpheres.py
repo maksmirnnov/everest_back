@@ -9,6 +9,7 @@ class Command(BaseCommand):
         SeminarSphere.objects.bulk_create([
             SeminarSphere(sphere='zakupki'),
             SeminarSphere(sphere='nalogi')
-        ])
+        ],
+        ignore_conflicts=True)
 
         print('All default cats updated. Have a nice day!')
