@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('Compose start') {
             steps {
-                sh "docker-compose --env-file .env.test --project-name everest_back_test build --no-cache"
-                sh "docker-compose --env-file .env.test --project-name everest_back_test up -d"
+                sh "docker-compose --env-file .env.test --project-name everest_back_test up -d --force-recreate"
                 sh "sleep 25"
             }
         }
@@ -45,8 +44,7 @@ pipeline {
         stage('CD') {
             steps {
                 sh "docker-compose --project-name everest_back down -v"
-                sh "docker-compose --env-file .env.prod --project-name everest_back build --no-cache"
-                sh "docker-compose --env-file .env.prod --project-name everest_back up -d"
+                sh "docker-compose --env-file .env.prod --project-name everest_back up -d --force-recreate"
             }
         }
     }
