@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import Seminar, Lector, SeminarPriceItem, SeminarSphere, SeminarFormat
 
 
-admin.site.register(SeminarSphere)
-admin.site.register(SeminarFormat)
+# admin.site.register(SeminarSphere)
+# admin.site.register(SeminarFormat)
 
 
 class SeminarAdmin(admin.ModelAdmin):

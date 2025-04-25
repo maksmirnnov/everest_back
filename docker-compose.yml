@@ -17,6 +17,8 @@ services:
         sleep 20 &&
         python manage.py makemigrations &&
         python manage.py migrate &&
+        python manage.py create_default_SeminarFormats &&
+        python manage.py create_default_SeminarSpheres &&
         gunicorn --bind 0.0.0.0:$BACK_PORT --workers 3 everest.wsgi:application
       "
     depends_on:
